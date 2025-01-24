@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://57jb7xweuqgu"]
+
+[ext_resource type="Script" path="res://scripts/knob.gd" id="1_m7gcq"]
+[ext_resource type="Texture2D" uid="uid://dq2olh6dfc4kt" path="res://temp_assets/temp_sprites/knob.png" id="2_2idhh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fv3rr"]
+radius = 9.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7uj"]
+size = Vector2(8, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo4ye"]
+size = Vector2(25, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pq2o"]
+size = Vector2(8, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wv6q"]
+size = Vector2(25, 8)
+
+[node name="ShowerKnob" type="Node2D"]
+z_index = 5
+scale = Vector2(2, 2)
+script = ExtResource("1_m7gcq")
+
+[node name="KnobSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_2idhh")
+
+[node name="CentralScrew" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CentralScrew"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_fv3rr")
+
+[node name="TopHandle" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopHandle"]
+position = Vector2(0, -18.5)
+shape = SubResource("RectangleShape2D_5l7uj")
+
+[node name="RightHandle" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightHandle"]
+position = Vector2(19.5, 2)
+shape = SubResource("RectangleShape2D_oo4ye")
+
+[node name="BottomHandle" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomHandle"]
+position = Vector2(0, 20.5)
+shape = SubResource("RectangleShape2D_3pq2o")
+
+[node name="LeftHandle" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHandle"]
+position = Vector2(-19.5, 2)
+shape = SubResource("RectangleShape2D_6wv6q")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="TopHandle" to="." method="_on_top_handle_area_entered"]
+[connection signal="area_exited" from="TopHandle" to="." method="_on_top_handle_area_exited"]
+[connection signal="area_entered" from="RightHandle" to="." method="_on_right_handle_area_entered"]
+[connection signal="area_exited" from="RightHandle" to="." method="_on_right_handle_area_exited"]
+[connection signal="area_entered" from="BottomHandle" to="." method="_on_bottom_handle_area_entered"]
+[connection signal="area_exited" from="BottomHandle" to="." method="_on_bottom_handle_area_exited"]
+[connection signal="area_entered" from="LeftHandle" to="." method="_on_left_handle_area_entered"]
+[connection signal="area_exited" from="LeftHandle" to="." method="_on_left_handle_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
