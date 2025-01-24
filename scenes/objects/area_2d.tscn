@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdhxro117nhq2"]
+
+[ext_resource type="Script" path="res://coin_script.gd" id="1_mdhsi"]
+[ext_resource type="Texture2D" uid="uid://4utitldp4dp0" path="res://tiles.png" id="2_qpuqp"]
+[ext_resource type="AudioStream" uid="uid://caeajtbq6gca8" path="res://coin.wav" id="3_0nuec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7w12"]
+size = Vector2(64, 64)
+
+[node name="Bubble" type="Area2D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_mdhsi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g7w12")
+
+[node name="pickup_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0nuec")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qpuqp")
+region_enabled = true
+region_rect = Rect2(128, 128, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
